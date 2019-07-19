@@ -1,0 +1,14 @@
+{
+    "name": "lightvoldemar/kassanova-bank-api",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "5.3.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Light Voldemar",
+            "email": "light.voldemar@gmail.com"
+        }
+    ]
+}
