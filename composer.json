@@ -2,7 +2,7 @@
     "name": "lightvoldemar/kassanova-bank-api",
     "type": "library",
     "require": {
-        "yiisoft/yii2-httpclient": "*",
+        "yiisoft/yii2-httpclient": "*"
     },
     "license": "MIT",
     "authors": [
