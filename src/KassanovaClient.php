@@ -1,16 +1,12 @@
 <?php
-namespace Kassanova;
+namespace lightvoldemar\kassanovaBankApi\Kassanova;
 
-use Epay\Exceptions\Amount;
-use Epay\Exceptions\Certificate;
-use Epay\Exceptions\Common;
-use Epay\Exceptions\Currency;
-use Epay\Exceptions\Order;
+use yii\httpclient\Client;
 
 /**
  * Клиентский класс.
  */
-class Client
+class KassanovaClient
 {
     /**
      * Имя провайдера.
@@ -196,7 +192,8 @@ class Client
      */
     private function sendRequest($url,$data) {
 
-        $response = $requestClient->createRequest()
+        $client = new Client();
+        $response = $client->createRequest()
             ->setMethod('post')
             ->setUrl($url)
             ->setData($data)
