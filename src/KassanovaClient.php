@@ -125,9 +125,9 @@ class KassanovaClient
      */
     public function setLang($key = 'ru')
     {
-        $types = array_flip($this->langList);
+        $types = array_flip($this->languageList);
 
-        $this->currency = isset($types[$key]) ? $types[$key] : null;
+        $this->language = isset($types[$key]) ? $types[$key] : null;
     }
 
     /**
