@@ -1,5 +1,5 @@
 <?php
-namespace lightvoldemar\kassanovaBankApi\Kassanova;
+namespace lightvoldemar\kassanovaBankApi;
 
 use yii\httpclient\Client;
 
@@ -79,14 +79,6 @@ class KassanovaClient
      * @var array
      */
     protected $config = array();
-
-    /**
-     * Конструктор.
-     */
-    public function __construct()
-    {
-
-    }
 
     /**
      * Возвращает ID валюты.
