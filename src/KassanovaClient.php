@@ -1,5 +1,5 @@
 <?php
-namespace lightvoldemar\kassanovaBankApi;
+namespace KassanovaBankApi;
 
 use yii\httpclient\Client;
 
