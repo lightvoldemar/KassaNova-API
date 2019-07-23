@@ -10,5 +10,10 @@
             "name": "Light Voldemar",
             "email": "light.voldemar@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "KassanovaBankApi\\": "src/",
+        }
+    }
 }
