@@ -142,8 +142,8 @@ class KassanovaClient
         $order['return_url'] = $this->returnUrl;
         $order['fail_url'] = $this->failUrl;
         $result = $this->registerOrder($amount,$orderId);
-        $this->dataRedirectUrl = $result['formUrl'];
-        $this->dataOrderSig = $result['orderId'];
+        $this->dataRedirectUrl = $result->data['formUrl'];
+        $this->dataOrderSig = $result->data['orderId'];
     }
 
     /**
