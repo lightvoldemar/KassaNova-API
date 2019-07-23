@@ -1,7 +1,10 @@
 <?php
 namespace KassanovaBankApi;
 
+use yii\helpers\Json;
 use yii\httpclient\Client;
+
+
 
 /**
  * Клиентский класс.
@@ -335,7 +338,6 @@ class KassanovaClient
      * @return object
      */
     private function sendRequest($url,$data) {
-
         $client = new Client();
         $response = $client->createRequest()
             ->setMethod('post')
@@ -344,7 +346,7 @@ class KassanovaClient
             ->send();
 
         if($response->isOk) {
-            return $response->content;
+            return Json::decode($response->content);
         }
     }
   
