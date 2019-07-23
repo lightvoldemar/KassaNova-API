@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "KassanovaBankApi\\": "src/",
+            "KassanovaBankApi\\": "src/"
         }
     }
 }
