@@ -1,7 +1,10 @@
 <?php
 namespace KassanovaBankApi;
 
+use yii\helpers\Json;
 use yii\httpclient\Client;
+
+
 
 /**
  * Клиентский класс.
@@ -47,6 +50,11 @@ class KassanovaClient
      * API пароль.
      */
     public $apiPassword;
+
+    /**
+     * Ошибки.
+     */
+    public $errorMessage;
 
     /**
      * URL регистрации заказа.
@@ -121,13 +129,13 @@ class KassanovaClient
     /**
      * Задает указанный тип языка.
      *
-     * @param  string $key
+     * @param  string $key 
      */
     public function setLang($key = 'ru')
     {
-        $types = array_flip($this->langList);
+        $types = array_flip($this->languageList);
 
-        $this->currency = isset($types[$key]) ? $types[$key] : null;
+        $this->language = isset($types[$key]) ? $types[$key] : null;
     }
 
     /**
@@ -142,8 +150,13 @@ class KassanovaClient
         $order['return_url'] = $this->returnUrl;
         $order['fail_url'] = $this->failUrl;
         $result = $this->registerOrder($amount,$orderId);
-        $this->dataRedirectUrl = $result['formUrl'];
-        $this->dataOrderSig = $result['orderId'];
+        if(!isset($result['errorCode'])) {
+            $this->dataRedirectUrl = $result['formUrl'];
+            $this->dataOrderSig = $result['orderId'];
+        } else {
+            $this->errorMessage = $result['errorMessage'];
+        }
+
     }
 
     /**
@@ -335,7 +348,6 @@ class KassanovaClient
      * @return object
      */
     private function sendRequest($url,$data) {
-
         $client = new Client();
         $response = $client->createRequest()
             ->setMethod('post')
@@ -344,7 +356,7 @@ class KassanovaClient
             ->send();
 
         if($response->isOk) {
-            return $response;
+            return Json::decode($response->content);
         }
     }
   
