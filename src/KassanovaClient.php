@@ -124,7 +124,7 @@ class KassanovaClient
     /**
      * Задает указанный тип языка.
      *
-     * @param  string $key
+     * @param  string $key 
      */
     public function setLang($key = 'ru')
     {
@@ -145,8 +145,14 @@ class KassanovaClient
         $order['return_url'] = $this->returnUrl;
         $order['fail_url'] = $this->failUrl;
         $result = $this->registerOrder($amount,$orderId);
-        $this->dataRedirectUrl = $result['formUrl'];
-        $this->dataOrderSig = $result['orderId'];
+        if($result['errorCode']==0) {
+            $this->dataRedirectUrl = $result['formUrl'];
+            $this->dataOrderSig = $result['orderId'];
+            return 0;
+        } else {
+            return $result['errorMessage'];
+        }
+
     }
 
     /**
