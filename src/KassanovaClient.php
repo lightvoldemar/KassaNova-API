@@ -153,9 +153,8 @@ class KassanovaClient
         if(!isset($result['errorCode'])) {
             $this->dataRedirectUrl = $result['formUrl'];
             $this->dataOrderSig = $result['orderId'];
-            return 0;
         } else {
-            return $result['errorMessage'];
+            $this->errorMessage = $result['errorMessage'];
         }
 
     }
@@ -177,7 +176,7 @@ class KassanovaClient
         $data['returnUrl'] = $this->returnUrl;
         $data['failUrl'] = $this->failUrl;
 
-        $this->errorMessage = $this->sendRequest($this->registerUrl,$data);
+        return $this->sendRequest($this->registerUrl,$data);
     }
 
     
