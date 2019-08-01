@@ -145,7 +145,7 @@ class KassanovaClient
         $order['return_url'] = $this->returnUrl;
         $order['fail_url'] = $this->failUrl;
         $result = $this->registerOrder($amount,$orderId);
-        if($result['errorCode']==0) {
+        if(!isset($result['errorCode'])) {
             $this->dataRedirectUrl = $result['formUrl'];
             $this->dataOrderSig = $result['orderId'];
             return 0;
