@@ -52,6 +52,11 @@ class KassanovaClient
     public $apiPassword;
 
     /**
+     * Ошибки.
+     */
+    public $errorMessage;
+
+    /**
      * URL регистрации заказа.
      */
     public $registerUrl = 'https://3ds.kassanova.kz/payment/rest/register.do';
@@ -172,7 +177,7 @@ class KassanovaClient
         $data['returnUrl'] = $this->returnUrl;
         $data['failUrl'] = $this->failUrl;
 
-        return $this->sendRequest($this->registerUrl,$data);
+        $this->errorMessage = $this->sendRequest($this->registerUrl,$data);
     }
 
     
