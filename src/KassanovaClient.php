@@ -88,29 +88,17 @@ class KassanovaClient
      */
     protected $config = array();
 
-    /**
-     * Возвращает ID валюты.
-     *
-     * @param  string $key
-     * @return null|integer
-     */
-    public function getCurrencyId($key = 'KZT')
+    public function __construct()
     {
-        $types = array_flip($this->currencyEnum);
-
-        return isset($types[$key]) ? $types[$key] : null;
+        $this->setCurrency();
     }
 
     /**
      * Задает указанный тип валюты.
-     *
-     * @param  string $key
      */
-    public function setCurrency($key = 'KZT')
+    public function setCurrency()
     {
-        $types = array_flip($this->currencyEnum);
-
-        $this->currency = isset($types[$key]) ? $types[$key] : null;
+        $this->currency = ArrayHelper::getValue(array_flip(static::getCurrency()), $this->params['currency']);
     }
 
     /**
@@ -190,13 +178,13 @@ class KassanovaClient
          * */
 
         // Язык системы
-        $arr[$this->requestParamsArr['LANG']] = $this->params['lang'];
+        $arr['language'] = $this->language;
         // ID заказа
-        $arr[$this->requestParamsArr['ORDER_ID']] = '';
+        $arr['orderNumber'] = '';
         // Логин
-        $arr[$this->requestParamsArr['USERNAME']] = $this->params['username'];
+        $arr['userName'] = $this->apiLogin;
         // Пароль
-        $arr[$this->requestParamsArr['PASSWORD']] = $this->params['password'];
+        $arr['password'] = $this->apiPassword;
 
         $this->sendRequest($url_key,$arr);
     }
@@ -218,13 +206,13 @@ class KassanovaClient
         // Валюта
         //$arr[$this->requestParamsArr['CURRENCY']] = '';
         // Язык системы
-        $arr[$this->requestParamsArr['LANG']] = $this->params['lang'];
+        $arr['language'] = $this->language;
         // ID заказа
-        $arr[$this->requestParamsArr['ORDER_ID']] = '';
+        $arr['orderNumber'] = '';
         // Логин
-        $arr[$this->requestParamsArr['USERNAME']] = $this->params['username'];
+        $arr['userName'] = $this->apiLogin;
         // Пароль
-        $arr[$this->requestParamsArr['PASSWORD']] = $this->params['password'];
+        $arr['password'] = $this->apiPassword;
 
         // Отправка запроса
         $this->sendRequest($url_key,$arr);
@@ -241,13 +229,13 @@ class KassanovaClient
          * */
 
         // Язык системы
-        $arr[$this->requestParamsArr['LANG']] = $this->params['lang'];
+        $arr['language'] = $this->language;
         // ID заказа
-        $arr[$this->requestParamsArr['ORDER_ID']] = '';
+        $arr['orderNumber'] = '';
         // Логин
-        $arr[$this->requestParamsArr['USERNAME']] = $this->params['username'];
+        $arr['userName'] = $this->apiLogin;
         // Пароль
-        $arr[$this->requestParamsArr['PASSWORD']] = $this->params['password'];
+        $arr['password'] = $this->apiPassword;
 
         // Отправка запроса
         $this->sendRequest($url_key,$arr);
@@ -265,13 +253,13 @@ class KassanovaClient
          * */
 
         // Логин
-        $arr[$this->requestParamsArr['USERNAME']] = $this->params['username'];
+        $arr['userName'] = $this->apiLogin;
         // Пароль
-        $arr[$this->requestParamsArr['PASSWORD']] = $this->params['password'];
+        $arr['password'] = $this->apiPassword;
         // ID заказа
-        $arr[$this->requestParamsArr['ORDER_ID']] = '';
+        $arr['orderNumber'] = '';
         // Язык системы
-        $arr[$this->requestParamsArr['LANG']] = $this->params['lang'];
+        $arr['language'] = $this->language;
         // ID ордера по мерчанту
         $arr[$this->requestParamsArr['MERCHANT_ORDER_NUM']] = '';
 
@@ -296,11 +284,11 @@ class KassanovaClient
          * */
 
         // Логин
-        $arr[$this->requestParamsArr['USERNAME']] = $this->params['username'];
+        $arr['userName'] = $this->apiLogin;
         // Пароль
-        $arr[$this->requestParamsArr['PASSWORD']] = $this->params['password'];
+        $arr['password'] = $this->apiPassword;
         // Язык системы
-        $arr[$this->requestParamsArr['LANG']] = $this->params['lang'];
+        $arr['language'] = $this->language;
         // Номер страницы
         $arr[$this->requestParamsArr['PAGE']] = '';
         // Кол-во записей на  странице
@@ -330,9 +318,9 @@ class KassanovaClient
          * */
 
         // Логин
-        $arr[$this->requestParamsArr['USERNAME']] = $this->params['username'];
+        $arr['userName'] = $this->apiLogin;
         // Пароль
-        $arr[$this->requestParamsArr['PASSWORD']] = $this->params['password'];
+        $arr['password'] = $this->apiPassword;
         // Номер карты
         $arr[$this->requestParamsArr['PAN']] = '';
 
@@ -358,6 +346,13 @@ class KassanovaClient
         if($response->isOk) {
             return Json::decode($response->content);
         }
+    }
+
+    public static function getCurrency() {
+        return [
+            840 => 'USD',
+            398 => 'KZT',
+        ];
     }
   
 }
