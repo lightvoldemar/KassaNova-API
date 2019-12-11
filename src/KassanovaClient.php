@@ -3,7 +3,7 @@ namespace KassanovaBankApi;
 
 use yii\helpers\Json;
 use yii\httpclient\Client;
-
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -90,15 +90,15 @@ class KassanovaClient
 
     public function __construct()
     {
-        $this->setCurrency();
+
     }
 
     /**
      * Задает указанный тип валюты.
      */
-    public function setCurrency()
+    public function setCurrency($currency)
     {
-        $this->currency = ArrayHelper::getValue(array_flip(static::getCurrency()), $this->params['currency']);
+        $this->currency = $currency;
     }
 
     /**
