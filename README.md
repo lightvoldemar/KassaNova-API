@@ -1,6 +1,8 @@
 # KassaNova Bank
 PHP library for KassaNova integration
 
+https://packagist.org/packages/lightvoldemar/kassanova-bank-api
+
 ## Installation
 ```
 $ composer require lightvoldemar/kassanova-bank-api
